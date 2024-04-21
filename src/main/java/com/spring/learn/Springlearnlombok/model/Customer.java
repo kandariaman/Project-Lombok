@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Component
@@ -13,12 +14,12 @@ import java.util.Date;
 public class Customer {
 
     private String customerName;
-    private Integer id;
+    private UUID id;
     private String version;
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
 
-    public Customer(String customerName, Integer id, String version, LocalDate createdDate, LocalDate lastModifiedDate) {
+    public Customer(String customerName, UUID id, String version, LocalDate createdDate, LocalDate lastModifiedDate) {
         this.customerName = customerName;
         this.id = id;
         this.version = version;
@@ -36,7 +37,7 @@ public class Customer {
 
     public static class CustomerBuilder {
         private String customerName;
-        private Integer id;
+        private UUID id;
         private String version;
         private LocalDate createdDate;
         private LocalDate lastModifiedDate;
@@ -49,7 +50,7 @@ public class Customer {
             return this;
         }
 
-        public CustomerBuilder id(Integer id) {
+        public CustomerBuilder id(UUID id) {
             this.id = id;
             return this;
         }

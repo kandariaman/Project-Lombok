@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.invoke.MethodType;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -39,8 +40,8 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/{custId}",method = RequestMethod.GET)
-    public Customer getCustomerById(@PathVariable("custId") Integer id) {
-        return customerService.getCustomerById(1);
+    public Customer getCustomerById(@PathVariable("custId") UUID id) {
+        return customerService.getCustomerById(id);
     }
 
 }

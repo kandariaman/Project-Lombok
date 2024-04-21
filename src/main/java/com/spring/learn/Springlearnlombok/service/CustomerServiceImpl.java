@@ -5,23 +5,22 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private List<Customer> customerList = new ArrayList<>();
+    private Map<UUID,Customer> customerList = new HashMap();
 
     public CustomerServiceImpl() {
 
-        Customer aman = new Customer("aman", 1, "V2", LocalDate.now(), LocalDate.now());
-        Customer vijay = new Customer("vijay", 2, "V5", LocalDate.now(), LocalDate.now());
-        Customer anil = new Customer("anil", 3, "V6",LocalDate.now(), LocalDate.now());
+        Customer aman = new Customer("aman", UUID.randomUUID(), "V2", LocalDate.now(), LocalDate.now());
+        Customer vijay = new Customer("vijay", UUID.randomUUID(), "V5", LocalDate.now(), LocalDate.now());
+        Customer anil = new Customer("anil", UUID.randomUUID(), "V6",LocalDate.now(), LocalDate.now());
 
-        customerList.add(aman);
-        customerList.add(vijay);
-        customerList.add(anil);
+        customerList.put(aman.getId(), aman);
+        customerList.put(vijay.getId(), vijay);
+        customerList.put(anil.getId(), anil);
 
     }
 
@@ -29,11 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getAllCustomer() {
 
-        return customerList;
+        return customerList.values().stream().toList();
     }
 
     @Override
-    public Customer getCustomerById(Integer id) {
+    public Customer getCustomerById(UUID id) {
 
         return customerList.get(id);
     }
@@ -44,11 +43,11 @@ public class CustomerServiceImpl implements CustomerService {
                 .customerName(customer.getCustomerName())
                 .createdDate(LocalDate.now())
                 .lastModifiedDate(LocalDate.now())
-                .id(customer.getId())
+                .id(UUID.randomUUID())
                 .version(customer.getVersion())
                 .build();
 
-        customerList.add(customer1);
+        customerList.put(customer1.getId(),customer1);
 
     return customer1;
     }
