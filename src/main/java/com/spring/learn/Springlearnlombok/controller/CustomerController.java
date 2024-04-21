@@ -3,6 +3,7 @@ package com.spring.learn.Springlearnlombok.controller;
 import com.spring.learn.Springlearnlombok.model.Customer;
 import com.spring.learn.Springlearnlombok.service.CustomerService;
 import com.spring.learn.Springlearnlombok.service.CustomerServiceImpl;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,12 @@ public class CustomerController {
         customerService.updateCustomer(customerId, customer);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "api/v1/customer/"+ customerId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("{customerID}")
+    public ResponseEntity deleteCustomer(@PathVariable("customerID") UUID customerId) {
+        customerService.deleteCustomerById(customerId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
