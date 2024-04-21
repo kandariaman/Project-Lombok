@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/beer/")
+@RequestMapping("/api/v1/beer")
 public class BeerController {
     private final BeerService beerService;
 
@@ -28,6 +28,14 @@ public class BeerController {
         headers.add("Location", "/api/v1/beer" + savedBeer.getId());
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "{beerId}")
+    public ResponseEntity handleGet(@PathVariable("beerId") UUID beerId,@RequestBody Beer beer) {
+        beerService.UpdateBeerPut(beerId, beer);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "/api/v1/beer/" + beerId);
+        return new ResponseEntity<>(headers,HttpStatus.CREATED);
     }
 
     @Autowired
