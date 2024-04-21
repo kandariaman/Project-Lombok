@@ -3,20 +3,22 @@ package com.spring.learn.Springlearnlombok.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 @Component
 @NoArgsConstructor
+@Builder
 public class Customer {
 
     private String customerName;
     private Integer id;
     private String version;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    private LocalDate createdDate;
+    private LocalDate lastModifiedDate;
 
-    public Customer(String customerName, Integer id, String version, Date createdDate, Date lastModifiedDate) {
+    public Customer(String customerName, Integer id, String version, LocalDate createdDate, LocalDate lastModifiedDate) {
         this.customerName = customerName;
         this.id = id;
         this.version = version;
@@ -36,8 +38,8 @@ public class Customer {
         private String customerName;
         private Integer id;
         private String version;
-        private Date createdDate;
-        private Date lastModifiedDate;
+        private LocalDate createdDate;
+        private LocalDate lastModifiedDate;
 
         CustomerBuilder() {
         }
@@ -57,12 +59,12 @@ public class Customer {
             return this;
         }
 
-        public CustomerBuilder createdDate(Date createdDate) {
+        public CustomerBuilder createdDate(LocalDate createdDate) {
             this.createdDate = createdDate;
             return this;
         }
 
-        public CustomerBuilder lastModifiedDate(Date lastModifiedDate) {
+        public CustomerBuilder lastModifiedDate(LocalDate lastModifiedDate) {
             this.lastModifiedDate = lastModifiedDate;
             return this;
         }
